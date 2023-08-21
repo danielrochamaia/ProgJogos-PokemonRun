@@ -18,6 +18,7 @@
 #include "Game.h"
 #include "Sprite.h"
 #include "Scene.h"
+#include "PlataformaAnimada.h"
 
 // ------------------------------------------------------------------------------
 
@@ -33,8 +34,7 @@ private:
     Image* whiscashBig = nullptr;                // pequeno tronco de madeira
     Image* wailmer = nullptr;                // grande tronco de madeira
     Image* lotadSmall = nullptr;                // pequena fila de tartarugas
-    Image* lotadBig = nullptr;                // grande fila de tartarugas
-    Image* garbodor = nullptr;                // caminhão tanque
+    Image* lotadBig = nullptr;               // grande fila de tartarugas
 
 public:
     Scene* scene = nullptr;        // gerenciador de cena

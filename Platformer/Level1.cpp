@@ -14,6 +14,7 @@
 #include "Level1.h"
 #include "Player.h"
 #include "Plataforma.h"
+#include "PlataformaAnimada.h"
 #include "PokemonRun.h"
 #include <string>
 #include <fstream>
@@ -39,10 +40,12 @@ void Level1::Init()
     wailmer = new Image("Resources/wailmerInvertida.png");
     lotadSmall = new Image("Resources/lotadSmallInvertido.png");
     lotadBig = new Image("Resources/lotadBig.png");
-    garbodor = new Image("Resources/garbodor.png");
+
+
 
     //cria plataformas
     Plataforma* plataforma;
+    PlataformaAnimada* plataformaAnimada;
 
     //rio
     plataforma = new Plataforma(new Image("Resources/rio.png"), 0, INIMIGO);
@@ -121,6 +124,58 @@ void Level1::Init()
     plataforma->BBox(new Rect(-85, -19, 85, 19));
     scene->Add(plataforma, MOVING);
 
+    // ---------------------------
+    // obstáculos da pista
+    // 
+
+    //quarta faixa
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/wobbuffet-andando.png", 57, 50, 5, 4), -350, INIMIGO);
+    plataformaAnimada->MoveTo(50, 380);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/wobbuffet-andando.png", 57, 50, 5, 4), -350, INIMIGO);
+    plataformaAnimada->MoveTo(561, 380);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+   
+    //terceira faixa
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/moltres-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada->MoveTo(200, 450);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/moltres-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada->MoveTo(600, 450);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+
+    //segunda faixa
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada->MoveTo(400, 530);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada->MoveTo(50, 530);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada->MoveTo(700, 530);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+
+    //primeira faixa
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/garbodor-andando.png", 60, 60, 5, 4), 350, INIMIGO);
+    plataformaAnimada->MoveTo(760, 600);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/garbodor-andando.png", 60, 60, 5, 4), 350, INIMIGO);
+    plataformaAnimada->MoveTo(300, 600);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
 }
 
 // ------------------------------------------------------------------------------
@@ -133,7 +188,6 @@ void Level1::Finalize()
     delete wailmer;
     delete lotadSmall;
     delete lotadBig;
-    delete garbodor;
 }
 
 // ------------------------------------------------------------------------------

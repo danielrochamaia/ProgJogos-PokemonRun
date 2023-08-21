@@ -175,6 +175,7 @@
     <ClCompile Include="Home.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Plataforma.cpp" />
+    <ClCompile Include="PlataformaAnimada.cpp" />
     <ClCompile Include="PokemonRun.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Home.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Plataforma.h" />
+    <ClInclude Include="PlataformaAnimada.h" />
     <ClInclude Include="PokemonRun.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Object.h" />
