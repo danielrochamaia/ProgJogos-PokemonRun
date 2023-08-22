@@ -16,23 +16,33 @@
 #include "Plataforma.h"
 #include "PlataformaAnimada.h"
 #include "PokemonRun.h"
+#include "GameOver.h"
+#include "Ash.h"
 #include <string>
 #include <fstream>
 using std::ifstream;
 using std::string;
 
+bool Level1::gameover = false;
+Scene* Level1::scene = nullptr;
+Painel* Level1::painel = nullptr;
+
+
+
 // ------------------------------------------------------------------------------
 
 void Level1::Init()
 {
+    gameover = false;
     // cria gerenciador de cena
     scene = new Scene();
+    painel = new Painel();
 
     // cria background
     backg = new Sprite("Resources/back.png");
 
     // cria jogador
-    Player* player = new Player();
+    Player *player = new Player();
     scene->Add(player, MOVING);
 
     whiscashSmall = new Image("Resources/whiscashSmall.png");
@@ -41,7 +51,11 @@ void Level1::Init()
     lotadSmall = new Image("Resources/lotadSmallInvertido.png");
     lotadBig = new Image("Resources/lotadBig.png");
 
-
+    //cria Ash
+    Ash* ash = new Ash(new Image("Resources/Ash.png"), 0, ASH);
+    ash->MoveTo(596, 29);
+    ash->BBox(new Rect(-15, -20, 15, 20));
+    scene->Add(ash, STATIC);
 
     //cria plataformas
     Plataforma* plataforma;
@@ -66,40 +80,40 @@ void Level1::Init()
 
     //quarta faixa
     plataforma = new Plataforma(whiscashBig, 150, AMIGAVEL);
-    plataforma->MoveTo(480, 155);
-    plataforma->BBox(new Rect(-85, -16, 85, 16));
+    plataforma->MoveTo(480, 158);
+    plataforma->BBox(new Rect(-82, -13, 82, 13));
     scene->Add(plataforma, MOVING);
 
     plataforma = new Plataforma(whiscashBig, 150, AMIGAVEL);
-    plataforma->MoveTo(1080, 155);
-    plataforma->BBox(new Rect(-85, -16, 85, 16));
+    plataforma->MoveTo(1080, 158);
+    plataforma->BBox(new Rect(-82, -13, 82, 13));
     scene->Add(plataforma, MOVING);
 
     //terceira faixa
     plataforma = new Plataforma(wailmer, -250, AMIGAVEL);
-    plataforma->MoveTo(200, 195);
-    plataforma->BBox(new Rect(-75, -16, 75, 16));
+    plataforma->MoveTo(200, 199);
+    plataforma->BBox(new Rect(-77, -13, 77, 13));
     scene->Add(plataforma, MOVING);
 
     plataforma = new Plataforma(wailmer, -250, AMIGAVEL);
-    plataforma->MoveTo(700, 195);
-    plataforma->BBox(new Rect(-75, -16, 75, 16));
+    plataforma->MoveTo(700, 199);
+    plataforma->BBox(new Rect(-77, -13, 77, 13));
     scene->Add(plataforma, MOVING);
 
     //segunda faixa
     plataforma = new Plataforma(whiscashSmall, 300, AMIGAVEL);
-    plataforma->MoveTo(350, 235);
-    plataforma->BBox(new Rect(-65, -20, 65, 20));
+    plataforma->MoveTo(350, 240);
+    plataforma->BBox(new Rect(-65, -13, 65, 13));
     scene->Add(plataforma, MOVING);
 
     plataforma = new Plataforma(whiscashSmall, 300, AMIGAVEL);
-    plataforma->MoveTo(850, 235);
-    plataforma->BBox(new Rect(-65, -20, 65, 20));
+    plataforma->MoveTo(850, 240);
+    plataforma->BBox(new Rect(-65, -13, 65, 13));
     scene->Add(plataforma, MOVING);
 
     plataforma = new Plataforma(whiscashSmall, 300, AMIGAVEL);
-    plataforma->MoveTo(1250, 235);
-    plataforma->BBox(new Rect(-65, -20, 65, 20));
+    plataforma->MoveTo(1250, 240);
+    plataforma->BBox(new Rect(-65, -13, 65, 13));
     scene->Add(plataforma, MOVING);
 
     //primeira faixa
@@ -129,50 +143,55 @@ void Level1::Init()
     // 
 
     //quarta faixa
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/wobbuffet-andando.png", 57, 50, 5, 4), -350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/wobbuffet-andando.png", 57, 50, 5, 4), -300, INIMIGO);
     plataformaAnimada->MoveTo(50, 380);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
 
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/wobbuffet-andando.png", 57, 50, 5, 4), -350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/wobbuffet-andando.png", 57, 50, 5, 4), -300, INIMIGO);
     plataformaAnimada->MoveTo(561, 380);
+    plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
+    scene->Add(plataformaAnimada, MOVING);
+
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/wobbuffet-andando.png", 57, 50, 5, 4), -300, INIMIGO);
+    plataformaAnimada->MoveTo(300, 380);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
    
     //terceira faixa
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/moltres-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/moltres-andando.png", 63, 63, 5, 4), 400, INIMIGO);
     plataformaAnimada->MoveTo(200, 450);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
 
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/moltres-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/moltres-andando.png", 63, 63, 5, 4), 400, INIMIGO);
     plataformaAnimada->MoveTo(600, 450);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
 
     //segunda faixa
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 268, INIMIGO);
     plataformaAnimada->MoveTo(400, 530);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
 
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 268, INIMIGO);
     plataformaAnimada->MoveTo(50, 530);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
 
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/weezing-andando.png", 63, 63, 5, 4), 268, INIMIGO);
     plataformaAnimada->MoveTo(700, 530);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
 
     //primeira faixa
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/garbodor-andando.png", 60, 60, 5, 4), 350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/garbodor-andando.png", 60, 60, 5, 4), 150, INIMIGO);
     plataformaAnimada->MoveTo(760, 600);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
 
-    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/garbodor-andando.png", 60, 60, 5, 4), 350, INIMIGO);
+    plataformaAnimada = new PlataformaAnimada(new TileSet("Resources/garbodor-andando.png", 60, 60, 5, 4), 150, INIMIGO);
     plataformaAnimada->MoveTo(300, 600);
     plataformaAnimada->BBox(new Rect(-25, -24, 25, 24));
     scene->Add(plataformaAnimada, MOVING);
@@ -194,6 +213,11 @@ void Level1::Finalize()
 
 void Level1::Update()
 {
+    if (gameover) {
+        GameOver::score = to_string(painel->Score());
+        return Engine::Next<GameOver>();
+    }
+    
     // habilita/desabilita bounding box
     if (window->KeyPress('B'))
     {
@@ -213,7 +237,9 @@ void Level1::Update()
     else
     {
         // atualiza cena
+
         scene->Update();
+        painel->Update();
         scene->CollisionDetection();
     }
 }
@@ -224,6 +250,9 @@ void Level1::Draw()
 {
     // desenha cena
     backg->Draw(window->CenterX(), window->CenterY(), Layer::BACK);
+    
+    painel->Draw();
+    
     scene->Draw();
 
     // desenha bounding box dos objetos

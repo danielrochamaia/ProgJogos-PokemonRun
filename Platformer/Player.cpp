@@ -14,6 +14,8 @@
 #include "Plataforma.h"
 #include "Engine.h"
 #include "Home.h"
+#include "Level1.h"
+
 
 // ---------------------------------------------------------------------------------
 
@@ -27,6 +29,7 @@ Player::Player()
     ctrlDown = true;
     ctrlLeft = true;
     ctrlRight = true;
+    status = false;
 
     // imagem do pacman é 48x48 (com borda transparente de 4 pixels)
     BBox(new Rect(-15, -15, 15, 15));
@@ -108,6 +111,11 @@ void Player::OnCollision(Object* obj)
         referencia = 0;
     }
 
+    if (obj->Type() == ASH && currState == LEFT)
+    {
+            Level1::gameover = true;
+    }
+
 }
 
 // ---------------------------------------------------------------------------------
@@ -117,7 +125,6 @@ void Player::OnCollision(Object* obj)
 
 void Player::Update()
 {
-    float passo = 41.5f;
     // desloca sapo para cima
     if (ctrlUp && window->KeyDown(VK_UP))
     {
@@ -164,18 +171,20 @@ void Player::Update()
         ctrlRight = true;
     }
 
-    // mantém sapo dentro da tela
+     //mantém sapo dentro da tela
     //Parte de cima
-    //if (y < 65)
-    //{
-    //    MoveTo(x, 65);
-    //}
+// maintain mc on the screen
+    if (x + spriteR->Width() / 2.0f > window->Width())
+        MoveTo(window->Width() - spriteR->Width() / 2.0f, y);
 
-    ////Parte de baixo
-    //if (y > 545)
-    //{
-    //    MoveTo(x, 545);
-    //}
+    if (x - spriteL->Width() / 2.0f < 0)
+        MoveTo(spriteL->Width() / 2.0f, y);
+
+    if (y + spriteD->Width() / 2.0f > window->Height())
+        MoveTo(x, window->Height() - spriteD->Height() / 2.0f);
+
+    if (y - spriteU->Height() / 2.0f < 10)
+        MoveTo(x, spriteU->Height() / 2.0f + 10);
 }
 
 // ---------------------------------------------------------------------------------
