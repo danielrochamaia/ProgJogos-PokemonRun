@@ -29,7 +29,7 @@ private:
     Sprite* backg = nullptr;       // background
    
     bool viewScene = true;              // visualiza sprites da cena
-    bool viewBBox = true;             // visualiza bounding box
+    bool viewBBox = false;             // visualiza bounding box
 
     Image* whiscashSmall = nullptr;                // pequeno tronco de madeira
     Image* whiscashBig = nullptr;                // pequeno tronco de madeira

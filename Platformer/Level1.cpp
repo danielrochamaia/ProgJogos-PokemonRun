@@ -39,7 +39,7 @@ void Level1::Init()
     painel = new Painel();
 
     // cria background
-    backg = new Sprite("Resources/back.png");
+    backg = new Sprite("Resources/back1.png");
 
     // cria jogador
     Player *player = new Player();
@@ -60,6 +60,17 @@ void Level1::Init()
     //cria plataformas
     Plataforma* plataforma;
     PlataformaAnimada* plataformaAnimada;
+
+    //cactus
+    plataforma = new Plataforma(new Image("Resources/cerca.png"), 0, INIMIGO);
+    plataforma->MoveTo(337,78, Layer::BACK);
+    plataforma->BBox(new Rect(-337, -16, 337, 16));
+    scene->Add(plataforma, STATIC);
+
+    plataforma = new Plataforma(new Image("Resources/cerca.png"), 0, INIMIGO);
+    plataforma->MoveTo(858, 78, Layer::BACK);
+    plataforma->BBox(new Rect(-104, -16, 104, 16));
+    scene->Add(plataforma, STATIC);
 
     //rio
     plataforma = new Plataforma(new Image("Resources/rio.png"), 0, INIMIGO);
