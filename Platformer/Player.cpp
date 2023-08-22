@@ -106,10 +106,14 @@ void Player::OnCollision(Object* obj)
     {
         if (referencia == 0) {
             MoveTo(480.0f, 650.0f);
-            Level1::gameover = true;
         }
 
         referencia = 0;
+    }
+
+    if (obj->Type() == ASH)
+    {
+            Level1::gameover = true;
     }
 
 }

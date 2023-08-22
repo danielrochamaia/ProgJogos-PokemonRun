@@ -19,7 +19,8 @@ enum PokemonRunObjects
     PLAYER,
     RIO,
     AMIGAVEL,
-    INIMIGO
+    INIMIGO,
+    ASH
 };
 
 // ------------------------------------------------------------------------------

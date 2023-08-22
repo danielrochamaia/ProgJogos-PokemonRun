@@ -17,6 +17,7 @@
 #include "PlataformaAnimada.h"
 #include "PokemonRun.h"
 #include "GameOver.h"
+#include "Ash.h"
 #include <string>
 #include <fstream>
 using std::ifstream;
@@ -50,7 +51,11 @@ void Level1::Init()
     lotadSmall = new Image("Resources/lotadSmallInvertido.png");
     lotadBig = new Image("Resources/lotadBig.png");
 
-
+    //cria Ash
+    Ash* ash = new Ash(new Image("Resources/Ash.png"), 0, ASH);
+    ash->MoveTo(596, 29);
+    ash->BBox(new Rect(-15, -20, 15, 20));
+    scene->Add(ash, STATIC);
 
     //cria plataformas
     Plataforma* plataforma;
