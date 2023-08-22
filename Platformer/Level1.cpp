@@ -16,23 +16,32 @@
 #include "Plataforma.h"
 #include "PlataformaAnimada.h"
 #include "PokemonRun.h"
+#include "GameOver.h"
 #include <string>
 #include <fstream>
 using std::ifstream;
 using std::string;
 
+bool Level1::gameover = false;
+Scene* Level1::scene = nullptr;
+Painel* Level1::painel = nullptr;
+
+
+
 // ------------------------------------------------------------------------------
 
 void Level1::Init()
 {
+    gameover = false;
     // cria gerenciador de cena
     scene = new Scene();
+    painel = new Painel();
 
     // cria background
     backg = new Sprite("Resources/back.png");
 
     // cria jogador
-    Player* player = new Player();
+    Player *player = new Player();
     scene->Add(player, MOVING);
 
     whiscashSmall = new Image("Resources/whiscashSmall.png");
@@ -194,6 +203,11 @@ void Level1::Finalize()
 
 void Level1::Update()
 {
+    if (gameover) {
+        GameOver::score = to_string(painel->Score());
+        return Engine::Next<GameOver>();
+    }
+    
     // habilita/desabilita bounding box
     if (window->KeyPress('B'))
     {
@@ -213,7 +227,9 @@ void Level1::Update()
     else
     {
         // atualiza cena
+
         scene->Update();
+        painel->Update();
         scene->CollisionDetection();
     }
 }
@@ -224,6 +240,9 @@ void Level1::Draw()
 {
     // desenha cena
     backg->Draw(window->CenterX(), window->CenterY(), Layer::BACK);
+    
+    painel->Draw();
+    
     scene->Draw();
 
     // desenha bounding box dos objetos

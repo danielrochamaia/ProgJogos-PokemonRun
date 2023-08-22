@@ -14,6 +14,8 @@
 #include "Plataforma.h"
 #include "Engine.h"
 #include "Home.h"
+#include "Level1.h"
+
 
 // ---------------------------------------------------------------------------------
 
@@ -27,6 +29,7 @@ Player::Player()
     ctrlDown = true;
     ctrlLeft = true;
     ctrlRight = true;
+    status = false;
 
     // imagem do pacman é 48x48 (com borda transparente de 4 pixels)
     BBox(new Rect(-15, -15, 15, 15));
@@ -103,6 +106,7 @@ void Player::OnCollision(Object* obj)
     {
         if (referencia == 0) {
             MoveTo(480.0f, 650.0f);
+            Level1::gameover = true;
         }
 
         referencia = 0;

@@ -19,6 +19,7 @@
 #include "Sprite.h"
 #include "Scene.h"
 #include "PlataformaAnimada.h"
+#include "Painel.h"
 
 // ------------------------------------------------------------------------------
 
@@ -37,7 +38,11 @@ private:
     Image* lotadBig = nullptr;               // grande fila de tartarugas
 
 public:
-    Scene* scene = nullptr;        // gerenciador de cena
+    static Scene *scene;        // gerenciador de cena
+    static Painel *painel;
+    static bool gameover;
+
+
     void Init();                    // inicializa jogo
     void Update();                  // atualiza lógica do jogo
     void Draw();                    // desenha jogo

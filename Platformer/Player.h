@@ -41,10 +41,12 @@ private:
     bool ctrlDown;
     bool ctrlLeft;
     bool ctrlRight;
+    
 
 public:
     uint currState = STOPED;            // estado atual do jogador
     uint nextState = STOPED;            // próximo estado do jogador
+    bool status;
 
     Player();                           // construtor
     ~Player();                          // destrutor
